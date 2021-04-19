@@ -1,11 +1,15 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 from django.views.generic import UpdateView
 from accounts.forms import UserUpdateForm, ProfileFormset
 # LoginRequiredMixin добавляет проверку того, что пользователь авторизован в системе
+from accounts.models import User
+from posts.models import Apartment
 
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
@@ -46,3 +50,9 @@ def personal(request):
     return render(request, 'accounts/user-update.html', {
         'form': form
     })
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        instance.groups.add(Group.objects.get(name='common_users'))

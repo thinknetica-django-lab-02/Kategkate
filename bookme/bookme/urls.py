@@ -36,4 +36,7 @@ urlpatterns = [
     path('apartment/create/', ApartmentCreateView.as_view(), name='apartment-create'),
     path('apartment/<pk>/edit/', ApartmentEditView.as_view(), name='apartment-edit'),
     path('accounts/', include('allauth.urls')),
+    url(r'^signup/$', views.signup, name='signup'),
+    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        views.activate, name='activate'),
 ]

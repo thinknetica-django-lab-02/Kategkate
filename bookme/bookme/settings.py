@@ -159,3 +159,9 @@ AUTH_USER_MODEL = 'accounts.User'
 CKEDITOR_BASEPATH = "/my_static/ckeditor/ckeditor/"
 
 AUTH_USER_MODEL = 'accounts.User'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'youremail@gmail.com'
+EMAIL_HOST_PASSWORD = 'yourpassword'
+EMAIL_PORT = 587
